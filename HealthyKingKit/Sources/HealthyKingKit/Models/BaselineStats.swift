@@ -74,9 +74,25 @@ public struct ForecastResult: Sendable {
 /// change-point signal, and forward-looking forecast.
 public struct MetricInsight: Sendable {
     public let metric: MetricType
+    /// The most recent reading within the metric's freshness window. Named
+    /// `today` for the common case, but may be a few days old — see
+    /// `latestSampleDate` for exactly when it was recorded.
     public let today: Double?
+    /// The calendar day `today` was actually recorded on, so the UI can show
+    /// "今天 / 昨天 / 3 天前" instead of implying every value is from today.
+    public let latestSampleDate: Date?
     public let baseline: BaselineStats
     public let zScore: DirectedZScore?
     public let changePoint: ChangePointSignal
     public let forecast: ForecastResult?
+
+    public init(metric: MetricType, today: Double?, latestSampleDate: Date? = nil, baseline: BaselineStats, zScore: DirectedZScore?, changePoint: ChangePointSignal, forecast: ForecastResult?) {
+        self.metric = metric
+        self.today = today
+        self.latestSampleDate = latestSampleDate
+        self.baseline = baseline
+        self.zScore = zScore
+        self.changePoint = changePoint
+        self.forecast = forecast
+    }
 }

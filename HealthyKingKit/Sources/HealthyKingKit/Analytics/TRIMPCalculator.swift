@@ -37,8 +37,17 @@ public struct TRIMPCalculator: Sendable {
     }
 
     public func trimp(forWorkout workout: WorkoutSummary) -> Double? {
-        guard let avgHR = workout.averageHeartRate, maxHeartRate > restingHeartRate else { return nil }
-        let hrReserveFraction = (avgHR - restingHeartRate) / (maxHeartRate - restingHeartRate)
+        // Prefer measured heart rate; if the workout has none (manual entry,
+        // many third-party apps, no Apple Watch), fall back to an intensity
+        // estimated from the activity type so the session still counts.
+        let hrReserveFraction: Double
+        if let avgHR = workout.averageHeartRate, maxHeartRate > restingHeartRate {
+            hrReserveFraction = (avgHR - restingHeartRate) / (maxHeartRate - restingHeartRate)
+        } else if let estimated = workout.estimatedIntensityFraction {
+            hrReserveFraction = estimated
+        } else {
+            return nil
+        }
         let clamped = max(0, min(1, hrReserveFraction))
         let y: Double
         switch sex {

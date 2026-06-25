@@ -24,13 +24,19 @@ public struct InsightEngine: Sendable {
         // Baseline is computed over the window *ending the day before* the
         // recent window used for change detection, so a detector can't
         // "see" the very data it's trying to flag as anomalous.
+        // "Today" tolerates a few days of lag: overnight metrics are usually
+        // stamped to the night they were measured, so a strict same-day match
+        // would routinely show nothing. Fall back to the most recent reading
+        // within the metric's freshness window and report its actual date.
+        let recent = series.mostRecentSample(asOf: referenceDate, maxAgeDays: series.metric.freshnessWindowDays, calendar: calendar)
+
         guard let priorReference = calendar.date(byAdding: .day, value: -7, to: referenceDate) else {
             let baseline = baselineCalculator.baseline(for: series, asOf: referenceDate, calendar: calendar)
-            return MetricInsight(metric: series.metric, today: series.value(on: referenceDate, calendar: calendar), baseline: baseline, zScore: nil, changePoint: .none, forecast: nil)
+            return MetricInsight(metric: series.metric, today: recent?.value, latestSampleDate: recent?.date, baseline: baseline, zScore: nil, changePoint: .none, forecast: nil)
         }
 
         let baseline = baselineCalculator.baseline(for: series, asOf: priorReference, calendar: calendar)
-        let today = series.value(on: referenceDate, calendar: calendar)
+        let today = recent?.value
         let zScore = today.flatMap { baselineCalculator.zScore(today: $0, baseline: baseline) }
 
         let recentWindow = series.trailing(days: 7, before: referenceDate, calendar: calendar).map(\.value)
@@ -40,7 +46,7 @@ public struct InsightEngine: Sendable {
 
         let forecast = forecaster.forecast(for: series, asOf: referenceDate, calendar: calendar)
 
-        return MetricInsight(metric: series.metric, today: today, baseline: baseline, zScore: zScore, changePoint: changePoint, forecast: forecast)
+        return MetricInsight(metric: series.metric, today: today, latestSampleDate: recent?.date, baseline: baseline, zScore: zScore, changePoint: changePoint, forecast: forecast)
     }
 
     public func insights(for seriesList: [MetricTimeSeries], asOf referenceDate: Date, calendar: Calendar = .current) -> [MetricType: MetricInsight] {

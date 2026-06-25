@@ -11,13 +11,18 @@
 		02149F1A121F997FA1841C0E /* HealthyKingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7776CA70BEBAED810EC3D1 /* HealthyKingKit */; };
 		128D8C4847A2F1B00754A609 /* CardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6619F9734BA9EFD490FFD090 /* CardStyle.swift */; };
 		17FBFEB12CF1FC5CD052B762 /* TrendGlanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */; };
+		1A92DBB3336BA1BAB6A1909D /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C45553EB8CEED7727CF655 /* DesignSystem.swift */; };
 		2C4246C965D5EC0FD3FA60D8 /* HealthyKingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E887B43677CB7413B08A8A2 /* HealthyKingKit */; };
 		3AE4D9CAEDBBEC67C37BE724 /* RecoveryComponentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF30F8DB888AA636A0F3352 /* RecoveryComponentRow.swift */; };
 		416B8CA82E80994CF07C5D53 /* HealthDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55931886969D2C8768F44C3B /* HealthDataStore.swift */; };
 		42924486164269221D1938E6 /* HealthyKingWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 57ADC4BD7BDFBC25436EDE83 /* HealthyKingWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		51B40CD75EFA1D187B1CCAE5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA498D5BD11F3AF24DF8456 /* OnboardingView.swift */; };
 		5F2151907F22082C81BAA352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4B34206BEC68CE8E265D03 /* Assets.xcassets */; };
+		6428D2463B7396E134A8D569 /* MetricDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7916B93E1CD14BECC7C23722 /* MetricDetailView.swift */; };
+		6D89E2706703EB6AAB71EF96 /* TrainingLoadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE844FAEA6F7EF23AC97104 /* TrainingLoadDetailView.swift */; };
 		7A4E3237522B9BF0FEB2F7B8 /* HealthyKingWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126F7E51523F0D370BDE3860 /* HealthyKingWidgetBundle.swift */; };
+		7C07117DF84A1C73B0DBDEDC /* SleepDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB01E2BD8A00F5B1C6F8BCE /* SleepDetailView.swift */; };
+		7FFFBE5FD5165F52DB9DB9C5 /* RecoveryRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5E260A70FAC431FFA79A2B /* RecoveryRing.swift */; };
 		84371F29B8864FD8BB974CFB /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DBE32143963DB28C082B0 /* MainTabView.swift */; };
 		88D2F5499A7C5CA49BB0B130 /* RecoveryRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52074DFA9C115B62DE4F12 /* RecoveryRingView.swift */; };
 		8A61AED4F6AE990757B5DCE5 /* MetricDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F3AACF55FB0E01CD99E62 /* MetricDetailView.swift */; };
@@ -25,11 +30,13 @@
 		901E6DDA1B2F6FB88E2007C1 /* TrainingLoadCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E024D439EA27EFBEF948E /* TrainingLoadCard.swift */; };
 		A095B42C5C3ECBEF6F6951CF /* HealthyKingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C35408407BE1E12ADCAE9 /* HealthyKingApp.swift */; };
 		A91DCFB9C65407518205E437 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA9E1BCDF16C408CA94729 /* SettingsView.swift */; };
+		AA7EBBB7944F601E5988A8AB /* MetricStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB75E07C38BFFE4FA1124FBF /* MetricStatus.swift */; };
 		ACE4983E8B0680D6244F8568 /* HealthyKingWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F520FC507C7F7FA2E2B0A400 /* HealthyKingWatchApp.swift */; };
 		B00DFD26CB93E9FB4D237732 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892D7B2D00B92C78698D9D53 /* TodayView.swift */; };
 		B875E23AAA89129D9E9BA1AC /* TrendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940D19717BF208AF7203C03 /* TrendsListView.swift */; };
 		BF3C02A69526C5EDB5783D79 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD350272113CB26639C355 /* DashboardView.swift */; };
 		C463D17D25D5F833813C0311 /* WatchHealthDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F4AB520ACE740A43C24B18 /* WatchHealthDataStore.swift */; };
+		CD168475B0C97D681923B23E /* RecoveryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ABA4E356B8F16EC0B6EC8C /* RecoveryDetailView.swift */; };
 		CE5FDE17F758660661C17D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFE356883FBFAB3CD80D43B /* Assets.xcassets */; };
 		D0B0C8EEC76BD6239655D80A /* CrossPromoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCDA8E8420DBC93E1288EA1 /* CrossPromoCard.swift */; };
 		E2C581DB5DB226706588BDD5 /* MetricIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */; };
@@ -81,9 +88,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0AB01E2BD8A00F5B1C6F8BCE /* SleepDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepDetailView.swift; sourceTree = "<group>"; };
 		0B0DBE32143963DB28C082B0 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		126F7E51523F0D370BDE3860 /* HealthyKingWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingWidgetBundle.swift; sourceTree = "<group>"; };
-		2B06481DA7440039401AD3EF /* HealthyKing.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HealthyKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B06481DA7440039401AD3EF /* HealthyKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthyKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34299D40982EE1A8BE739432 /* HealthyKingWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyKingWidget.entitlements; sourceTree = "<group>"; };
 		35B60DB2FF273BB19D3E33F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A80E14FACC2EB285DBA4407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 		5EBD350272113CB26639C355 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		629E024D439EA27EFBEF948E /* TrainingLoadCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLoadCard.swift; sourceTree = "<group>"; };
 		6619F9734BA9EFD490FFD090 /* CardStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStyle.swift; sourceTree = "<group>"; };
+		7916B93E1CD14BECC7C23722 /* MetricDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricDetailView.swift; sourceTree = "<group>"; };
 		7BA498D5BD11F3AF24DF8456 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		7BBA9E1BCDF16C408CA94729 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		892D7B2D00B92C78698D9D53 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
@@ -103,16 +112,21 @@
 		8A701E7F24B579A63C56A0B9 /* HealthyKingKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HealthyKingKit; sourceTree = SOURCE_ROOT; };
 		8EF30F8DB888AA636A0F3352 /* RecoveryComponentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryComponentRow.swift; sourceTree = "<group>"; };
 		92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendGlanceView.swift; sourceTree = "<group>"; };
+		9DE844FAEA6F7EF23AC97104 /* TrainingLoadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLoadDetailView.swift; sourceTree = "<group>"; };
+		A1C45553EB8CEED7727CF655 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		A52C35408407BE1E12ADCAE9 /* HealthyKingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingApp.swift; sourceTree = "<group>"; };
 		B666A2A1CD5C9B8A3E945692 /* HealthyKingWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HealthyKingWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B940D19717BF208AF7203C03 /* TrendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsListView.swift; sourceTree = "<group>"; };
+		BB5E260A70FAC431FFA79A2B /* RecoveryRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRing.swift; sourceTree = "<group>"; };
 		BBCDA8E8420DBC93E1288EA1 /* CrossPromoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPromoCard.swift; sourceTree = "<group>"; };
 		BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricIcon.swift; sourceTree = "<group>"; };
 		C5D0FC967E03735FFBC98375 /* RecoveryComplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryComplication.swift; sourceTree = "<group>"; };
+		CB75E07C38BFFE4FA1124FBF /* MetricStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricStatus.swift; sourceTree = "<group>"; };
 		CC4B34206BEC68CE8E265D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF52074DFA9C115B62DE4F12 /* RecoveryRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRingView.swift; sourceTree = "<group>"; };
 		D4D5269A0F114AE354B3B30C /* HealthyKing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyKing.entitlements; sourceTree = "<group>"; };
 		E1938955B0DF78148382595B /* TrainingLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLoadView.swift; sourceTree = "<group>"; };
+		F2ABA4E356B8F16EC0B6EC8C /* RecoveryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryDetailView.swift; sourceTree = "<group>"; };
 		F520FC507C7F7FA2E2B0A400 /* HealthyKingWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingWatchApp.swift; sourceTree = "<group>"; };
 		F8F4AB520ACE740A43C24B18 /* WatchHealthDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHealthDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,7 +183,10 @@
 		4084B078D28C0CC6F0D74C84 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7916B93E1CD14BECC7C23722 /* MetricDetailView.swift */,
+				F2ABA4E356B8F16EC0B6EC8C /* RecoveryDetailView.swift */,
 				892D7B2D00B92C78698D9D53 /* TodayView.swift */,
+				9DE844FAEA6F7EF23AC97104 /* TrainingLoadDetailView.swift */,
 				92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */,
 				C757616349767018E138C31C /* Shared */,
 			);
@@ -246,6 +263,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		88BE5F1DA1F9238D993A9FAB /* Sleep */ = {
+			isa = PBXGroup;
+			children = (
+				0AB01E2BD8A00F5B1C6F8BCE /* SleepDetailView.swift */,
+			);
+			path = Sleep;
+			sourceTree = "<group>";
+		};
 		9E1D3F17133BE1E1B4CF0E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				8A2B389988281018D9A9FE27 /* MetricIcon.swift */,
+				BB5E260A70FAC431FFA79A2B /* RecoveryRing.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -292,7 +318,9 @@
 			isa = PBXGroup;
 			children = (
 				6619F9734BA9EFD490FFD090 /* CardStyle.swift */,
+				A1C45553EB8CEED7727CF655 /* DesignSystem.swift */,
 				BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */,
+				CB75E07C38BFFE4FA1124FBF /* MetricStatus.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -326,6 +354,7 @@
 				CA4C69622DAEF818C31A821D /* Onboarding */,
 				87E54503B5BB9F05A73B9A59 /* Settings */,
 				D0956FE6C26D6CB41EC3692F /* Shared */,
+				88BE5F1DA1F9238D993A9FAB /* Sleep */,
 				B301A6CA60E0F03A70453C08 /* TrainingLoad */,
 				62DE824AA2D3F7C2130266C8 /* Trends */,
 			);
@@ -432,11 +461,9 @@
 						ProvisioningStyle = Automatic;
 					};
 					DF610B2B009FA649100C8D0B = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					F3B2921FBC69A96AA718B4BC = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -490,8 +517,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACE4983E8B0680D6244F8568 /* HealthyKingWatchApp.swift in Sources */,
+				6428D2463B7396E134A8D569 /* MetricDetailView.swift in Sources */,
 				EE1D0C444FB454FE2D9B1E87 /* MetricIcon.swift in Sources */,
+				CD168475B0C97D681923B23E /* RecoveryDetailView.swift in Sources */,
+				7FFFBE5FD5165F52DB9DB9C5 /* RecoveryRing.swift in Sources */,
 				B00DFD26CB93E9FB4D237732 /* TodayView.swift in Sources */,
+				6D89E2706703EB6AAB71EF96 /* TrainingLoadDetailView.swift in Sources */,
 				17FBFEB12CF1FC5CD052B762 /* TrendGlanceView.swift in Sources */,
 				C463D17D25D5F833813C0311 /* WatchHealthDataStore.swift in Sources */,
 			);
@@ -513,15 +544,18 @@
 				128D8C4847A2F1B00754A609 /* CardStyle.swift in Sources */,
 				D0B0C8EEC76BD6239655D80A /* CrossPromoCard.swift in Sources */,
 				BF3C02A69526C5EDB5783D79 /* DashboardView.swift in Sources */,
+				1A92DBB3336BA1BAB6A1909D /* DesignSystem.swift in Sources */,
 				416B8CA82E80994CF07C5D53 /* HealthDataStore.swift in Sources */,
 				A095B42C5C3ECBEF6F6951CF /* HealthyKingApp.swift in Sources */,
 				84371F29B8864FD8BB974CFB /* MainTabView.swift in Sources */,
 				8A61AED4F6AE990757B5DCE5 /* MetricDetailView.swift in Sources */,
 				E2C581DB5DB226706588BDD5 /* MetricIcon.swift in Sources */,
+				AA7EBBB7944F601E5988A8AB /* MetricStatus.swift in Sources */,
 				51B40CD75EFA1D187B1CCAE5 /* OnboardingView.swift in Sources */,
 				3AE4D9CAEDBBEC67C37BE724 /* RecoveryComponentRow.swift in Sources */,
 				88D2F5499A7C5CA49BB0B130 /* RecoveryRingView.swift in Sources */,
 				A91DCFB9C65407518205E437 /* SettingsView.swift in Sources */,
+				7C07117DF84A1C73B0DBDEDC /* SleepDetailView.swift in Sources */,
 				901E6DDA1B2F6FB88E2007C1 /* TrainingLoadCard.swift in Sources */,
 				00CD438869B9C826AB9C8892 /* TrainingLoadView.swift in Sources */,
 				B875E23AAA89129D9E9BA1AC /* TrendsListView.swift in Sources */,
@@ -623,6 +657,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWidget/HealthyKingWidget.entitlements;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				INFOPLIST_FILE = Sources/HealthyKingWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,7 +668,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -644,6 +678,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKing/HealthyKing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				INFOPLIST_FILE = Sources/HealthyKing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -659,6 +694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWidget/HealthyKingWidget.entitlements;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				INFOPLIST_FILE = Sources/HealthyKingWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -669,7 +705,6 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -695,6 +730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKing/HealthyKing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
 				INFOPLIST_FILE = Sources/HealthyKing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

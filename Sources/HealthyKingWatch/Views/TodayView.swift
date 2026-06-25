@@ -1,109 +1,185 @@
 import SwiftUI
 import HealthyKingKit
 
+/// Primary watch screen: a scrollable list that leads into per-metric and
+/// per-score detail screens. Every row is a `NavigationLink`, so tapping
+/// anything now actually goes somewhere.
 struct TodayView: View {
     @EnvironmentObject private var dataStore: WatchHealthDataStore
 
-    private var ringGradient: AngularGradient {
-        let colors: [Color]
-        switch dataStore.recovery?.band {
-        case .needsRest: colors = [.orange, .red]
-        case .moderate: colors = [.yellow, .orange]
-        case .primed: colors = [.mint, .green]
-        case nil: colors = [.gray.opacity(0.4), .gray.opacity(0.4)]
-        }
-        return AngularGradient(colors: colors, center: .center, startAngle: .degrees(-90), endAngle: .degrees(270))
-    }
-
-    private var bandColor: Color {
-        switch dataStore.recovery?.band {
-        case .needsRest: return .orange
-        case .moderate: return .yellow
-        case .primed: return .green
-        case nil: return .secondary
-        }
+    private var displayedMetrics: [MetricType] {
+        MetricType.watchDisplayOrder.filter { dataStore.insights[$0]?.today != nil }
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 8) {
-                ZStack {
-                    Circle()
-                        .stroke(Color.secondary.opacity(0.15), lineWidth: 9)
-                    if let score = dataStore.recovery?.score {
-                        Circle()
-                            .trim(from: 0, to: Double(score) / 100.0)
-                            .stroke(ringGradient, style: StrokeStyle(lineWidth: 9, lineCap: .round))
-                            .rotationEffect(.degrees(-90))
-                            .animation(.easeInOut(duration: 0.6), value: score)
-                        VStack(spacing: 0) {
-                            Text("\(score)")
-                                .font(.system(size: 30, weight: .bold, design: .rounded))
-                            Text(dataStore.recovery?.band.rawValue ?? "")
+        List {
+            recoverySection
+            trainingLoadSection
+            metricsSection
+            if let error = dataStore.lastError {
+                errorSection(error)
+            }
+            footerSection
+        }
+        .navigationTitle("KingFit")
+        .task {
+            if !dataStore.hasLoadedOnce { await dataStore.refresh() }
+        }
+    }
+
+    // MARK: Recovery
+
+    @ViewBuilder
+    private var recoverySection: some View {
+        Section {
+            if dataStore.recovery != nil {
+                NavigationLink {
+                    RecoveryDetailView()
+                } label: {
+                    HStack(spacing: 12) {
+                        RecoveryRing(score: dataStore.recovery?.score, band: dataStore.recovery?.band, lineWidth: 7, showsBandText: false)
+                            .frame(width: 52, height: 52)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("恢复评分")
                                 .font(.caption2)
-                                .foregroundStyle(bandColor)
-                        }
-                    } else {
-                        ProgressView()
-                    }
-                }
-                .frame(width: 96, height: 96)
-                .padding(.top, 4)
-
-                if let trainingLoad = dataStore.trainingLoad, trainingLoad.isReliable {
-                    Label(trainingLoad.zone.rawValue, systemImage: "figure.run")
-                        .font(.caption2.bold())
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(.secondary.opacity(0.15), in: Capsule())
-                }
-
-                VStack(spacing: 6) {
-                    ForEach(MetricType.recoveryComponents, id: \.self) { metric in
-                        if let insight = dataStore.insights[metric], let today = insight.today {
-                            HStack(spacing: 6) {
-                                Image(systemName: metric.symbolName)
+                                .foregroundStyle(.secondary)
+                            Text(dataStore.recovery?.band.rawValue ?? "")
+                                .font(.headline)
+                            if dataStore.recovery?.isReliable == false {
+                                Text("校准中")
                                     .font(.caption2)
-                                    .foregroundStyle(metric.tintColor)
-                                    .frame(width: 16)
-                                Text(shortName(metric))
-                                    .font(.caption2)
-                                Spacer()
-                                Text(String(format: "%.0f", today))
-                                    .font(.caption2.bold())
-                                arrowIcon(for: insight)
+                                    .foregroundStyle(.orange)
                             }
                         }
                     }
+                    .padding(.vertical, 2)
                 }
-                .padding(.horizontal, 6)
-                .padding(.vertical, 8)
-                .background(.background.secondary, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            } else if dataStore.isLoading {
+                HStack { Spacer(); ProgressView(); Spacer() }
             }
-            .padding(.horizontal, 4)
         }
-        .task { await dataStore.refresh() }
     }
 
-    private func shortName(_ metric: MetricType) -> String {
-        switch metric {
-        case .heartRateVariability: return "HRV"
-        case .restingHeartRate: return "静息心率"
-        case .respiratoryRate: return "呼吸率"
-        case .sleepEfficiency: return "睡眠效率"
-        default: return metric.displayName
+    // MARK: Training load
+
+    @ViewBuilder
+    private var trainingLoadSection: some View {
+        if let load = dataStore.trainingLoad, load.isReliable {
+            Section {
+                NavigationLink {
+                    TrainingLoadDetailView()
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "figure.run")
+                            .foregroundStyle(.tint)
+                            .frame(width: 20)
+                        Text("训练负荷")
+                            .font(.caption)
+                        Spacer()
+                        Text(load.zone.rawValue)
+                            .font(.caption.bold())
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: Metrics
+
+    @ViewBuilder
+    private var metricsSection: some View {
+        if displayedMetrics.isEmpty {
+            if dataStore.hasLoadedOnce && dataStore.lastError == nil {
+                Section {
+                    ContentUnavailablePlaceholder(
+                        title: "暂无可显示的数据",
+                        message: "请确认已在 iPhone 的健康 App 中授权读取相关数据。",
+                        systemImage: "heart.text.square"
+                    )
+                }
+            }
+        } else {
+            Section("指标") {
+                ForEach(displayedMetrics, id: \.self) { metric in
+                    NavigationLink {
+                        MetricDetailView(metric: metric)
+                    } label: {
+                        metricRow(metric)
+                    }
+                }
+            }
         }
     }
 
     @ViewBuilder
-    private func arrowIcon(for insight: MetricInsight) -> some View {
-        switch insight.changePoint {
+    private func metricRow(_ metric: MetricType) -> some View {
+        let insight = dataStore.insights[metric]
+        HStack(spacing: 8) {
+            Image(systemName: metric.symbolName)
+                .font(.caption2)
+                .foregroundStyle(metric.tintColor)
+                .frame(width: 20)
+            Text(metric.shortName)
+                .font(.caption)
+            Spacer()
+            if let today = insight?.today {
+                Text(metric.formattedValue(today))
+                    .font(.caption.bold().monospacedDigit())
+            } else {
+                Text("—")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            arrowIcon(for: insight?.changePoint)
+        }
+    }
+
+    @ViewBuilder
+    private func arrowIcon(for signal: ChangePointSignal?) -> some View {
+        switch signal {
         case .shiftedUp:
             Image(systemName: "arrow.up").font(.caption2).foregroundStyle(.blue)
         case .shiftedDown:
             Image(systemName: "arrow.down").font(.caption2).foregroundStyle(.orange)
-        case .none:
+        default:
             Image(systemName: "minus").font(.caption2).foregroundStyle(.secondary)
+        }
+    }
+
+    // MARK: Error & footer
+
+    private func errorSection(_ message: String) -> some View {
+        Section {
+            Label(message, systemImage: "exclamationmark.triangle")
+                .font(.caption2)
+                .foregroundStyle(.orange)
+        }
+    }
+
+    @ViewBuilder
+    private var footerSection: some View {
+        Section {
+            Button {
+                Task { await dataStore.refresh() }
+            } label: {
+                HStack {
+                    if dataStore.isLoading {
+                        ProgressView()
+                    } else {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    Text(dataStore.isLoading ? "刷新中…" : "刷新")
+                        .font(.caption)
+                }
+            }
+            .disabled(dataStore.isLoading)
+
+            if let updated = dataStore.lastUpdated {
+                Text("更新于 \(updated.formatted(date: .omitted, time: .shortened))")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 }

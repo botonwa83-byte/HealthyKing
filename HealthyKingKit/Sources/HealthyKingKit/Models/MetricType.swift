@@ -50,8 +50,29 @@ public enum MetricType: String, Codable, CaseIterable, Sendable {
         }
     }
 
+    /// How many days back a sample may be and still count as the "current"
+    /// reading. Daily physiological metrics are usually stamped to the night
+    /// they were measured (often "yesterday" by the time you look), so a
+    /// strict same-day match would hide them; slow-moving metrics like weight
+    /// or VO2 Max can legitimately be weeks old and still be current.
+    public var freshnessWindowDays: Int {
+        switch self {
+        case .vo2Max, .bodyMass:
+            return 30
+        case .heartRateVariability, .restingHeartRate, .respiratoryRate,
+             .oxygenSaturation, .sleepDuration, .sleepEfficiency:
+            return 3
+        }
+    }
+
     /// Metrics that feed the composite recovery score, in priority order.
     public static let recoveryComponents: [MetricType] = [
         .heartRateVariability, .restingHeartRate, .respiratoryRate, .sleepEfficiency
+    ]
+
+    /// Every metric shown on the watch, recovery drivers first.
+    public static let watchDisplayOrder: [MetricType] = [
+        .heartRateVariability, .restingHeartRate, .respiratoryRate, .sleepEfficiency,
+        .sleepDuration, .oxygenSaturation, .vo2Max, .bodyMass
     ]
 }

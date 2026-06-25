@@ -5,54 +5,170 @@ struct TrainingLoadCard: View {
     let result: TrainingLoadResult?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            SectionHeader(title: "训练负荷", systemImage: "figure.run")
+        if let result, result.isReliable, let acwr = result.acwr {
+            reliableCard(result, acwr: acwr)
+        } else {
+            calibratingCard
+        }
+    }
 
-            if let result, result.isReliable, let acwr = result.acwr {
-                HStack {
-                    Label(result.zone.rawValue, systemImage: zoneIcon(for: result.zone))
-                        .font(.subheadline.bold())
-                        .foregroundStyle(color(for: result.zone))
-                    Spacer()
-                    Text(String(format: "ACWR %.2f", acwr))
-                        .font(.caption.monospaced())
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(.secondary.opacity(0.12), in: Capsule())
-                }
-                Text(result.zone.recommendation)
+    private func reliableCard(_ result: TrainingLoadResult, acwr: Double) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Label("训练负荷", systemImage: "figure.run")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                Spacer()
+                Text(result.zone.rawValue)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(result.zone.soloColor)
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 4)
+                    .background(result.zone.soloColor.opacity(0.14), in: Capsule())
+            }
+
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(String(format: "%.2f", acwr))
+                    .font(.system(size: 42, weight: .bold, design: .rounded))
+                    .foregroundStyle(.primary)
+                    .contentTransition(.numericText())
+                Text("ACWR · 急慢性负荷比")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            } else {
-                HStack(spacing: 8) {
-                    Image(systemName: "hourglass")
-                        .foregroundStyle(.secondary)
-                    Text("训练数据积累中，再坚持几次记录的锻炼后即可生成负荷评估。")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
             }
+
+            Text(result.zone.gentleHeadline)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(result.zone.soloColor)
+
+            ActivityPathBand(acwr: acwr, currentZone: result.zone)
+
+            Text(result.zone.recommendation)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .cardStyle()
     }
 
-    private func color(for zone: TrainingLoadZone) -> Color {
-        switch zone {
-        case .detraining: return .blue
-        case .optimal: return .green
-        case .elevated: return .orange
-        case .high: return .red
+    private var calibratingCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            SectionHeader(title: "训练负荷", systemImage: "figure.run")
+            HStack(spacing: 8) {
+                Image(systemName: "hourglass")
+                    .foregroundStyle(.secondary)
+                Text("训练数据积累中，再坚持几次记录的锻炼或多走动后即可生成负荷评估。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .cardStyle()
+    }
+}
+
+// MARK: - Activity Path band (Gentler-Streak-style zoned gauge)
+
+/// A horizontal "activity path" gauge: a smooth multi-zone gradient track with
+/// a marker showing where today's acute:chronic workload ratio sits, plus the
+/// four zone labels beneath. Echoes Gentler Streak's signature Activity Path.
+private struct ActivityPathBand: View {
+    let acwr: Double
+    let currentZone: TrainingLoadZone
+
+    // Display domain for the ACWR axis. Chosen so the optimal band sits
+    // comfortably mid-track and the extremes have room to breathe.
+    private let lo = 0.5
+    private let hi = 1.9
+
+    /// Zone boundaries in ACWR units, mapped to fractional positions on track.
+    private var boundaries: [Double] { [0.8, 1.3, 1.5] }
+
+    private func position(for value: Double) -> Double {
+        let clamped = min(max(value, lo), hi)
+        return (clamped - lo) / (hi - lo)
+    }
+
+    private var trackGradient: LinearGradient {
+        let detrain = TrainingLoadZone.detraining.soloColor
+        let optimal = TrainingLoadZone.optimal.soloColor
+        let elevated = TrainingLoadZone.elevated.soloColor
+        let high = TrainingLoadZone.high.soloColor
+        let b0 = position(for: 0.8)
+        let b1 = position(for: 1.3)
+        let b2 = position(for: 1.5)
+        return LinearGradient(
+            stops: [
+                .init(color: detrain, location: 0),
+                .init(color: detrain, location: b0 * 0.7),
+                .init(color: optimal, location: (b0 + b1) / 2),
+                .init(color: elevated, location: (b1 + b2) / 2),
+                .init(color: high, location: min(b2 + 0.12, 1)),
+                .init(color: high, location: 1)
+            ],
+            startPoint: .leading, endPoint: .trailing
+        )
+    }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            GeometryReader { geo in
+                let width = geo.size.width
+                let trackHeight: CGFloat = 14
+                let markerSize: CGFloat = 22
+                let x = width * position(for: acwr)
+
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(trackGradient)
+                        .frame(height: trackHeight)
+
+                    // Faint zone dividers.
+                    ForEach(boundaries, id: \.self) { bound in
+                        Rectangle()
+                            .fill(.white.opacity(0.55))
+                            .frame(width: 1.5, height: trackHeight)
+                            .offset(x: width * position(for: bound) - 0.75)
+                    }
+
+                    // Current-position marker.
+                    Circle()
+                        .fill(.white)
+                        .frame(width: markerSize, height: markerSize)
+                        .overlay(Circle().stroke(currentZone.soloColor, lineWidth: 4))
+                        .shadow(color: .black.opacity(0.18), radius: 3, y: 1)
+                        .offset(x: min(max(x - markerSize / 2, 0), width - markerSize))
+                        .animation(.easeInOut(duration: 0.6), value: acwr)
+                }
+                .frame(height: markerSize)
+            }
+            .frame(height: 22)
+
+            HStack(spacing: 0) {
+                zoneLabel("偏低", .detraining)
+                zoneLabel("适中", .optimal)
+                zoneLabel("偏高", .elevated)
+                zoneLabel("过高", .high)
+            }
         }
     }
 
-    private func zoneIcon(for zone: TrainingLoadZone) -> String {
-        switch zone {
-        case .detraining: return "arrow.down.circle.fill"
-        case .optimal: return "checkmark.circle.fill"
-        case .elevated: return "exclamationmark.triangle.fill"
-        case .high: return "flame.fill"
+    private func zoneLabel(_ text: String, _ zone: TrainingLoadZone) -> some View {
+        Text(text)
+            .font(.caption2.weight(zone == currentZone ? .bold : .regular))
+            .foregroundStyle(zone == currentZone ? zone.soloColor : .secondary)
+            .frame(maxWidth: .infinity)
+    }
+}
+
+// MARK: - Kind, human status wording (Gentler-Streak tone)
+
+private extension TrainingLoadZone {
+    var gentleHeadline: String {
+        switch self {
+        case .detraining: return "可以再活跃一点"
+        case .optimal: return "状态正好，继续保持"
+        case .elevated: return "注意节奏，适当放缓"
+        case .high: return "该好好恢复一下了"
         }
     }
 }

@@ -1,21 +1,38 @@
 import SwiftUI
-import Charts
 import HealthyKingKit
 
+/// Swipe-through glance of each metric. Each card taps into the full
+/// `MetricDetailView`, so this page is a fast browser, not a dead end.
 struct TrendGlanceView: View {
     @EnvironmentObject private var dataStore: WatchHealthDataStore
 
     private var metrics: [MetricType] {
-        MetricType.recoveryComponents.filter { dataStore.insights[$0] != nil }
+        MetricType.watchDisplayOrder.filter { dataStore.insights[$0]?.today != nil }
     }
 
     var body: some View {
-        TabView {
-            ForEach(metrics, id: \.self) { metric in
-                MetricGlanceCard(metric: metric, insight: dataStore.insights[metric])
+        Group {
+            if metrics.isEmpty {
+                ContentUnavailablePlaceholder(
+                    title: "暂无趋势数据",
+                    message: "授权并积累几天数据后即可查看。",
+                    systemImage: "chart.line.uptrend.xyaxis"
+                )
+            } else {
+                TabView {
+                    ForEach(metrics, id: \.self) { metric in
+                        NavigationLink {
+                            MetricDetailView(metric: metric)
+                        } label: {
+                            MetricGlanceCard(metric: metric, insight: dataStore.insights[metric])
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .tabViewStyle(.page)
             }
         }
-        .tabViewStyle(.page)
+        .navigationTitle("趋势")
     }
 }
 
@@ -34,42 +51,30 @@ private struct MetricGlanceCard: View {
                     .foregroundStyle(metric.tintColor)
             }
 
-            Text(metric.displayName)
+            Text(metric.shortName)
                 .font(.caption.bold())
 
             if let today = insight?.today {
-                Text(String(format: "%.0f %@", today, metric.unit))
+                Text(String(format: "%@ %@", metric.formattedValue(today), metric.unit))
                     .font(.title3.bold())
             }
 
-            if let forecast = insight?.forecast {
-                Label(directionLabel(forecast.direction), systemImage: directionIcon(forecast.direction))
+            if let dayText = relativeDayText(for: insight?.latestSampleDate) {
+                Text(dayText)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
 
             if let baseline = insight?.baseline, baseline.isReliable {
-                Text(String(format: "基线 %.0f", baseline.mean))
+                Text(String(format: "基线 %@", metric.formattedValue(baseline.mean)))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
+
+            Label("查看详情", systemImage: "chevron.right")
+                .font(.caption2)
+                .foregroundStyle(.tint)
         }
         .padding(.horizontal, 6)
-    }
-
-    private func directionLabel(_ direction: TrendDirection) -> String {
-        switch direction {
-        case .rising: return "上升"
-        case .falling: return "下降"
-        case .stable: return "平稳"
-        }
-    }
-
-    private func directionIcon(_ direction: TrendDirection) -> String {
-        switch direction {
-        case .rising: return "arrow.up.right"
-        case .falling: return "arrow.down.right"
-        case .stable: return "arrow.right"
-        }
     }
 }

@@ -11,6 +11,8 @@ final class HealthDataStore: ObservableObject {
     @Published private(set) var insights: [MetricType: MetricInsight] = [:]
     @Published private(set) var recovery: RecoveryScoreResult?
     @Published private(set) var trainingLoad: TrainingLoadResult?
+    @Published private(set) var todayActivity: ActivitySummary?
+    @Published private(set) var sleepNights: [SleepNight] = []
     @Published private(set) var acwrHistory: [DailySample] = []
     @Published private(set) var isLoading = false
     @Published private(set) var lastError: String?
@@ -41,13 +43,15 @@ final class HealthDataStore: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         do {
-            let seriesList = try await healthKit.fetchAllMetricSeries(days: 60)
+            let seriesList = try await healthKit.fetchAllMetricSeries(days: 365)
             metricSeries = Dictionary(uniqueKeysWithValues: seriesList.map { ($0.metric, $0) })
 
             let today = Date()
             insights = insightEngine.insights(for: seriesList, asOf: today)
             recovery = recoveryEngine.score(from: insights)
             trainingLoad = try await computeTrainingLoad(asOf: today)
+            todayActivity = try? await healthKit.fetchTodayActivity()
+            sleepNights = (try? await healthKit.fetchSleepNights(days: 30)) ?? []
             hasLoadedOnce = true
             lastError = nil
         } catch {
@@ -56,7 +60,7 @@ final class HealthDataStore: ObservableObject {
     }
 
     private func computeTrainingLoad(asOf referenceDate: Date) async throws -> TrainingLoadResult {
-        let workouts = try await healthKit.fetchWorkouts(days: 63)
+        let workouts = try await healthKit.fetchTrainingLoadWorkouts(days: 365)
         let restingHR = metricSeries[.restingHeartRate]?.samples.last?.value ?? 60
         let maxHR = TRIMPCalculator.estimatedMaxHeartRate(age: age)
         let trimpCalculator = TRIMPCalculator(restingHeartRate: restingHR, maxHeartRate: maxHR, sex: biologicalSex)

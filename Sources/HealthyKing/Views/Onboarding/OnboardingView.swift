@@ -16,22 +16,18 @@ struct OnboardingView: View {
                     VStack(spacing: 14) {
                         ZStack {
                             Circle()
-                                .fill(
-                                    LinearGradient(
-                                        colors: [Color(red: 0x12 / 255, green: 0x4E / 255, blue: 0x8F / 255), Color(red: 0x16 / 255, green: 0xA0 / 255, blue: 0x95 / 255)],
-                                        startPoint: .topLeading, endPoint: .bottomTrailing
-                                    )
-                                )
-                                .frame(width: 88, height: 88)
-                                .shadow(color: .black.opacity(0.15), radius: 12, x: 0, y: 6)
-                            Image(systemName: "waveform.path.ecg.rectangle.fill")
-                                .font(.system(size: 36))
+                                .fill(Brand.linear)
+                                .frame(width: 92, height: 92)
+                                .shadow(color: Brand.primary.opacity(0.4), radius: 14, x: 0, y: 8)
+                            Image(systemName: "waveform.path.ecg")
+                                .font(.system(size: 36, weight: .semibold))
                                 .foregroundStyle(.white)
                         }
                         .padding(.top, 8)
 
-                        Text("个人健康趋势教练")
+                        Text("KingFit · 个人健康趋势教练")
                             .font(.largeTitle.bold())
+                            .multilineTextAlignment(.center)
                         Text("用你自己的历史数据，看懂今天的身体状态")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -101,7 +97,7 @@ struct OnboardingView: View {
                 }
                 .padding()
             }
-            .background(Color(uiColor: .systemGroupedBackground))
+            .background(ScreenBackground())
             .navigationBarHidden(true)
         }
     }

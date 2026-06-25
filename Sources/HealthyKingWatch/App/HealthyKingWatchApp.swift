@@ -7,8 +7,8 @@ struct HealthyKingWatchApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                TodayView()
-                TrendGlanceView()
+                NavigationStack { TodayView() }
+                NavigationStack { TrendGlanceView() }
             }
             .tabViewStyle(.page)
             .environmentObject(dataStore)
