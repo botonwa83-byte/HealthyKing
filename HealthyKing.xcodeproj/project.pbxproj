@@ -1,0 +1,840 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00CD438869B9C826AB9C8892 /* TrainingLoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1938955B0DF78148382595B /* TrainingLoadView.swift */; };
+		02149F1A121F997FA1841C0E /* HealthyKingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F7776CA70BEBAED810EC3D1 /* HealthyKingKit */; };
+		128D8C4847A2F1B00754A609 /* CardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6619F9734BA9EFD490FFD090 /* CardStyle.swift */; };
+		17FBFEB12CF1FC5CD052B762 /* TrendGlanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */; };
+		2C4246C965D5EC0FD3FA60D8 /* HealthyKingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E887B43677CB7413B08A8A2 /* HealthyKingKit */; };
+		3AE4D9CAEDBBEC67C37BE724 /* RecoveryComponentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF30F8DB888AA636A0F3352 /* RecoveryComponentRow.swift */; };
+		416B8CA82E80994CF07C5D53 /* HealthDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55931886969D2C8768F44C3B /* HealthDataStore.swift */; };
+		42924486164269221D1938E6 /* HealthyKingWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 57ADC4BD7BDFBC25436EDE83 /* HealthyKingWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		51B40CD75EFA1D187B1CCAE5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA498D5BD11F3AF24DF8456 /* OnboardingView.swift */; };
+		5F2151907F22082C81BAA352 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4B34206BEC68CE8E265D03 /* Assets.xcassets */; };
+		7A4E3237522B9BF0FEB2F7B8 /* HealthyKingWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126F7E51523F0D370BDE3860 /* HealthyKingWidgetBundle.swift */; };
+		84371F29B8864FD8BB974CFB /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DBE32143963DB28C082B0 /* MainTabView.swift */; };
+		88D2F5499A7C5CA49BB0B130 /* RecoveryRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52074DFA9C115B62DE4F12 /* RecoveryRingView.swift */; };
+		8A61AED4F6AE990757B5DCE5 /* MetricDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7F3AACF55FB0E01CD99E62 /* MetricDetailView.swift */; };
+		8ABFD782D786AEBA74278A13 /* HealthyKingKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1B61B340469D8AA92281FB6 /* HealthyKingKit */; };
+		901E6DDA1B2F6FB88E2007C1 /* TrainingLoadCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629E024D439EA27EFBEF948E /* TrainingLoadCard.swift */; };
+		A095B42C5C3ECBEF6F6951CF /* HealthyKingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C35408407BE1E12ADCAE9 /* HealthyKingApp.swift */; };
+		A91DCFB9C65407518205E437 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA9E1BCDF16C408CA94729 /* SettingsView.swift */; };
+		ACE4983E8B0680D6244F8568 /* HealthyKingWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F520FC507C7F7FA2E2B0A400 /* HealthyKingWatchApp.swift */; };
+		B00DFD26CB93E9FB4D237732 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892D7B2D00B92C78698D9D53 /* TodayView.swift */; };
+		B875E23AAA89129D9E9BA1AC /* TrendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B940D19717BF208AF7203C03 /* TrendsListView.swift */; };
+		BF3C02A69526C5EDB5783D79 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD350272113CB26639C355 /* DashboardView.swift */; };
+		C463D17D25D5F833813C0311 /* WatchHealthDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F4AB520ACE740A43C24B18 /* WatchHealthDataStore.swift */; };
+		CE5FDE17F758660661C17D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EFE356883FBFAB3CD80D43B /* Assets.xcassets */; };
+		D0B0C8EEC76BD6239655D80A /* CrossPromoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCDA8E8420DBC93E1288EA1 /* CrossPromoCard.swift */; };
+		E2C581DB5DB226706588BDD5 /* MetricIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */; };
+		E84F4C542C4AB410C86BE401 /* HealthyKingWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B666A2A1CD5C9B8A3E945692 /* HealthyKingWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EE1D0C444FB454FE2D9B1E87 /* MetricIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B389988281018D9A9FE27 /* MetricIcon.swift */; };
+		FABA235F6FA41F278B204C6D /* RecoveryComplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D0FC967E03735FFBC98375 /* RecoveryComplication.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		93D95A6170481522334CF650 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDB91098C6DD739301A3D654 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DF8357F1FFDA6D2801C02DA;
+			remoteInfo = HealthyKingWatch;
+		};
+		FEB49BEA24E8AFC95298AB9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDB91098C6DD739301A3D654 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3B2921FBC69A96AA718B4BC;
+			remoteInfo = HealthyKingWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0A9235546E6C3891680AB858 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				42924486164269221D1938E6 /* HealthyKingWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C2096413453943527795C12 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E84F4C542C4AB410C86BE401 /* HealthyKingWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0B0DBE32143963DB28C082B0 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		126F7E51523F0D370BDE3860 /* HealthyKingWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingWidgetBundle.swift; sourceTree = "<group>"; };
+		2B06481DA7440039401AD3EF /* HealthyKing.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HealthyKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34299D40982EE1A8BE739432 /* HealthyKingWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyKingWidget.entitlements; sourceTree = "<group>"; };
+		35B60DB2FF273BB19D3E33F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4A80E14FACC2EB285DBA4407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4EFE356883FBFAB3CD80D43B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5508241FB14AFAEE99A26DB0 /* HealthyKingWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyKingWatch.entitlements; sourceTree = "<group>"; };
+		55931886969D2C8768F44C3B /* HealthDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataStore.swift; sourceTree = "<group>"; };
+		577A6228C145097C7C2E8446 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		57ADC4BD7BDFBC25436EDE83 /* HealthyKingWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthyKingWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D7F3AACF55FB0E01CD99E62 /* MetricDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricDetailView.swift; sourceTree = "<group>"; };
+		5EBD350272113CB26639C355 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		629E024D439EA27EFBEF948E /* TrainingLoadCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLoadCard.swift; sourceTree = "<group>"; };
+		6619F9734BA9EFD490FFD090 /* CardStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStyle.swift; sourceTree = "<group>"; };
+		7BA498D5BD11F3AF24DF8456 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		7BBA9E1BCDF16C408CA94729 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		892D7B2D00B92C78698D9D53 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		8A2B389988281018D9A9FE27 /* MetricIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricIcon.swift; sourceTree = "<group>"; };
+		8A701E7F24B579A63C56A0B9 /* HealthyKingKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HealthyKingKit; sourceTree = SOURCE_ROOT; };
+		8EF30F8DB888AA636A0F3352 /* RecoveryComponentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryComponentRow.swift; sourceTree = "<group>"; };
+		92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendGlanceView.swift; sourceTree = "<group>"; };
+		A52C35408407BE1E12ADCAE9 /* HealthyKingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingApp.swift; sourceTree = "<group>"; };
+		B666A2A1CD5C9B8A3E945692 /* HealthyKingWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HealthyKingWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B940D19717BF208AF7203C03 /* TrendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsListView.swift; sourceTree = "<group>"; };
+		BBCDA8E8420DBC93E1288EA1 /* CrossPromoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPromoCard.swift; sourceTree = "<group>"; };
+		BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricIcon.swift; sourceTree = "<group>"; };
+		C5D0FC967E03735FFBC98375 /* RecoveryComplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryComplication.swift; sourceTree = "<group>"; };
+		CC4B34206BEC68CE8E265D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF52074DFA9C115B62DE4F12 /* RecoveryRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryRingView.swift; sourceTree = "<group>"; };
+		D4D5269A0F114AE354B3B30C /* HealthyKing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthyKing.entitlements; sourceTree = "<group>"; };
+		E1938955B0DF78148382595B /* TrainingLoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingLoadView.swift; sourceTree = "<group>"; };
+		F520FC507C7F7FA2E2B0A400 /* HealthyKingWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthyKingWatchApp.swift; sourceTree = "<group>"; };
+		F8F4AB520ACE740A43C24B18 /* WatchHealthDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHealthDataStore.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		602929CD3E88DA151811A812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C4246C965D5EC0FD3FA60D8 /* HealthyKingKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80EE000B4DB59E1D02F43369 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8ABFD782D786AEBA74278A13 /* HealthyKingKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7E576A156B51C661395DB19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02149F1A121F997FA1841C0E /* HealthyKingKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		109FD9904BA76184DAFDA754 /* HealthyKingWatch */ = {
+			isa = PBXGroup;
+			children = (
+				5508241FB14AFAEE99A26DB0 /* HealthyKingWatch.entitlements */,
+				35B60DB2FF273BB19D3E33F8 /* Info.plist */,
+				9E1D3F17133BE1E1B4CF0E6F /* App */,
+				659AD7103120FE6B83E2E87C /* Resources */,
+				7D15AACFF7A91DB42B57A05A /* ViewModels */,
+				4084B078D28C0CC6F0D74C84 /* Views */,
+			);
+			path = HealthyKingWatch;
+			sourceTree = "<group>";
+		};
+		2A18D2FF19C0582BC8A98236 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				8A701E7F24B579A63C56A0B9 /* HealthyKingKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		4084B078D28C0CC6F0D74C84 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				892D7B2D00B92C78698D9D53 /* TodayView.swift */,
+				92D8EEBCE0C3A02F34839990 /* TrendGlanceView.swift */,
+				C757616349767018E138C31C /* Shared */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		44818AF95C8C1C09DF519B66 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B06481DA7440039401AD3EF /* HealthyKing.app */,
+				57ADC4BD7BDFBC25436EDE83 /* HealthyKingWatch.app */,
+				B666A2A1CD5C9B8A3E945692 /* HealthyKingWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		487775C93F85672BF7C2F0B1 = {
+			isa = PBXGroup;
+			children = (
+				2A18D2FF19C0582BC8A98236 /* Packages */,
+				C9B0B9A781DA7CC12CD93AD4 /* Sources */,
+				44818AF95C8C1C09DF519B66 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		529D8CA817357AF13790D49A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A52C35408407BE1E12ADCAE9 /* HealthyKingApp.swift */,
+				0B0DBE32143963DB28C082B0 /* MainTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		60319AAAA74FDA43B2B055ED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CC4B34206BEC68CE8E265D03 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		62DE824AA2D3F7C2130266C8 /* Trends */ = {
+			isa = PBXGroup;
+			children = (
+				5D7F3AACF55FB0E01CD99E62 /* MetricDetailView.swift */,
+				B940D19717BF208AF7203C03 /* TrendsListView.swift */,
+			);
+			path = Trends;
+			sourceTree = "<group>";
+		};
+		659AD7103120FE6B83E2E87C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4EFE356883FBFAB3CD80D43B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7D15AACFF7A91DB42B57A05A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F8F4AB520ACE740A43C24B18 /* WatchHealthDataStore.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		87E54503B5BB9F05A73B9A59 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BBCDA8E8420DBC93E1288EA1 /* CrossPromoCard.swift */,
+				7BBA9E1BCDF16C408CA94729 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		9E1D3F17133BE1E1B4CF0E6F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F520FC507C7F7FA2E2B0A400 /* HealthyKingWatchApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B301A6CA60E0F03A70453C08 /* TrainingLoad */ = {
+			isa = PBXGroup;
+			children = (
+				E1938955B0DF78148382595B /* TrainingLoadView.swift */,
+			);
+			path = TrainingLoad;
+			sourceTree = "<group>";
+		};
+		C757616349767018E138C31C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8A2B389988281018D9A9FE27 /* MetricIcon.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		C9B0B9A781DA7CC12CD93AD4 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F24B9A4F3B6B42671694DE7B /* HealthyKing */,
+				109FD9904BA76184DAFDA754 /* HealthyKingWatch */,
+				D20094FEE46E9FE71FC1B7CD /* HealthyKingWidget */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CA4C69622DAEF818C31A821D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				7BA498D5BD11F3AF24DF8456 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D0956FE6C26D6CB41EC3692F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6619F9734BA9EFD490FFD090 /* CardStyle.swift */,
+				BFE69B4E3D3CA01F87174BB2 /* MetricIcon.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		D20094FEE46E9FE71FC1B7CD /* HealthyKingWidget */ = {
+			isa = PBXGroup;
+			children = (
+				34299D40982EE1A8BE739432 /* HealthyKingWidget.entitlements */,
+				126F7E51523F0D370BDE3860 /* HealthyKingWidgetBundle.swift */,
+				4A80E14FACC2EB285DBA4407 /* Info.plist */,
+				C5D0FC967E03735FFBC98375 /* RecoveryComplication.swift */,
+			);
+			path = HealthyKingWidget;
+			sourceTree = "<group>";
+		};
+		D3BF2587915E1251E1DBEE02 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				5EBD350272113CB26639C355 /* DashboardView.swift */,
+				8EF30F8DB888AA636A0F3352 /* RecoveryComponentRow.swift */,
+				CF52074DFA9C115B62DE4F12 /* RecoveryRingView.swift */,
+				629E024D439EA27EFBEF948E /* TrainingLoadCard.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		E1A6EA5F0E5F3484375A667D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3BF2587915E1251E1DBEE02 /* Dashboard */,
+				CA4C69622DAEF818C31A821D /* Onboarding */,
+				87E54503B5BB9F05A73B9A59 /* Settings */,
+				D0956FE6C26D6CB41EC3692F /* Shared */,
+				B301A6CA60E0F03A70453C08 /* TrainingLoad */,
+				62DE824AA2D3F7C2130266C8 /* Trends */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E5B41900E03B12B70BC0F1C1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				55931886969D2C8768F44C3B /* HealthDataStore.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F24B9A4F3B6B42671694DE7B /* HealthyKing */ = {
+			isa = PBXGroup;
+			children = (
+				D4D5269A0F114AE354B3B30C /* HealthyKing.entitlements */,
+				577A6228C145097C7C2E8446 /* Info.plist */,
+				529D8CA817357AF13790D49A /* App */,
+				60319AAAA74FDA43B2B055ED /* Resources */,
+				E5B41900E03B12B70BC0F1C1 /* ViewModels */,
+				E1A6EA5F0E5F3484375A667D /* Views */,
+			);
+			path = HealthyKing;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9DF8357F1FFDA6D2801C02DA /* HealthyKingWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3147E182BFD083FFBCE62684 /* Build configuration list for PBXNativeTarget "HealthyKingWatch" */;
+			buildPhases = (
+				5CCC0B6B569B8A935E0E00E4 /* Sources */,
+				E7001C6C37A526A77DDC9278 /* Resources */,
+				B7E576A156B51C661395DB19 /* Frameworks */,
+				8C2096413453943527795C12 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F20992A5FBF71F449158C0E0 /* PBXTargetDependency */,
+			);
+			name = HealthyKingWatch;
+			packageProductDependencies = (
+				2F7776CA70BEBAED810EC3D1 /* HealthyKingKit */,
+			);
+			productName = HealthyKingWatch;
+			productReference = 57ADC4BD7BDFBC25436EDE83 /* HealthyKingWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DF610B2B009FA649100C8D0B /* HealthyKing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16157D2AC74B38C8F05CC71D /* Build configuration list for PBXNativeTarget "HealthyKing" */;
+			buildPhases = (
+				8AEE954E4242D46485FC4037 /* Sources */,
+				B24D614293EB136294C42B4E /* Resources */,
+				80EE000B4DB59E1D02F43369 /* Frameworks */,
+				0A9235546E6C3891680AB858 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67AB02B310F42186A25D59FA /* PBXTargetDependency */,
+			);
+			name = HealthyKing;
+			packageProductDependencies = (
+				F1B61B340469D8AA92281FB6 /* HealthyKingKit */,
+			);
+			productName = HealthyKing;
+			productReference = 2B06481DA7440039401AD3EF /* HealthyKing.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3B2921FBC69A96AA718B4BC /* HealthyKingWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E3E4E1664E8BC75F2A0AB51 /* Build configuration list for PBXNativeTarget "HealthyKingWidgetExtension" */;
+			buildPhases = (
+				6B541B048FFAD715D69232AE /* Sources */,
+				602929CD3E88DA151811A812 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HealthyKingWidgetExtension;
+			packageProductDependencies = (
+				5E887B43677CB7413B08A8A2 /* HealthyKingKit */,
+			);
+			productName = HealthyKingWidgetExtension;
+			productReference = B666A2A1CD5C9B8A3E945692 /* HealthyKingWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EDB91098C6DD739301A3D654 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9DF8357F1FFDA6D2801C02DA = {
+						ProvisioningStyle = Automatic;
+					};
+					DF610B2B009FA649100C8D0B = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F3B2921FBC69A96AA718B4BC = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AE5FE0FBDE76C38FCE671FC3 /* Build configuration list for PBXProject "HealthyKing" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 487775C93F85672BF7C2F0B1;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				557AE6F99D4D5339A19DB421 /* XCLocalSwiftPackageReference "HealthyKingKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 44818AF95C8C1C09DF519B66 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DF610B2B009FA649100C8D0B /* HealthyKing */,
+				9DF8357F1FFDA6D2801C02DA /* HealthyKingWatch */,
+				F3B2921FBC69A96AA718B4BC /* HealthyKingWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B24D614293EB136294C42B4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F2151907F22082C81BAA352 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7001C6C37A526A77DDC9278 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE5FDE17F758660661C17D01 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CCC0B6B569B8A935E0E00E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACE4983E8B0680D6244F8568 /* HealthyKingWatchApp.swift in Sources */,
+				EE1D0C444FB454FE2D9B1E87 /* MetricIcon.swift in Sources */,
+				B00DFD26CB93E9FB4D237732 /* TodayView.swift in Sources */,
+				17FBFEB12CF1FC5CD052B762 /* TrendGlanceView.swift in Sources */,
+				C463D17D25D5F833813C0311 /* WatchHealthDataStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B541B048FFAD715D69232AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A4E3237522B9BF0FEB2F7B8 /* HealthyKingWidgetBundle.swift in Sources */,
+				FABA235F6FA41F278B204C6D /* RecoveryComplication.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AEE954E4242D46485FC4037 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				128D8C4847A2F1B00754A609 /* CardStyle.swift in Sources */,
+				D0B0C8EEC76BD6239655D80A /* CrossPromoCard.swift in Sources */,
+				BF3C02A69526C5EDB5783D79 /* DashboardView.swift in Sources */,
+				416B8CA82E80994CF07C5D53 /* HealthDataStore.swift in Sources */,
+				A095B42C5C3ECBEF6F6951CF /* HealthyKingApp.swift in Sources */,
+				84371F29B8864FD8BB974CFB /* MainTabView.swift in Sources */,
+				8A61AED4F6AE990757B5DCE5 /* MetricDetailView.swift in Sources */,
+				E2C581DB5DB226706588BDD5 /* MetricIcon.swift in Sources */,
+				51B40CD75EFA1D187B1CCAE5 /* OnboardingView.swift in Sources */,
+				3AE4D9CAEDBBEC67C37BE724 /* RecoveryComponentRow.swift in Sources */,
+				88D2F5499A7C5CA49BB0B130 /* RecoveryRingView.swift in Sources */,
+				A91DCFB9C65407518205E437 /* SettingsView.swift in Sources */,
+				901E6DDA1B2F6FB88E2007C1 /* TrainingLoadCard.swift in Sources */,
+				00CD438869B9C826AB9C8892 /* TrainingLoadView.swift in Sources */,
+				B875E23AAA89129D9E9BA1AC /* TrendsListView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67AB02B310F42186A25D59FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9DF8357F1FFDA6D2801C02DA /* HealthyKingWatch */;
+			targetProxy = 93D95A6170481522334CF650 /* PBXContainerItemProxy */;
+		};
+		F20992A5FBF71F449158C0E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3B2921FBC69A96AA718B4BC /* HealthyKingWidgetExtension */;
+			targetProxy = FEB49BEA24E8AFC95298AB9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		11DF06FFFCD8B220DE679DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		3F81A16ED97E1EE4E25B057F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWatch/HealthyKingWatch.entitlements;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
+				INFOPLIST_FILE = Sources/HealthyKingWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		50D3CB5818A8DF9490B489BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWidget/HealthyKingWidget.entitlements;
+				INFOPLIST_FILE = Sources/HealthyKingWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		549511BF88352501B6C4EB35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKing/HealthyKing.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Sources/HealthyKing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5C3E5BA8DD86AC70D583C1C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWidget/HealthyKingWidget.entitlements;
+				INFOPLIST_FILE = Sources/HealthyKingWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app.watchkitapp.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		90779627FF98CACF0F129141 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKingWatch/HealthyKingWatch.entitlements;
+				DEVELOPMENT_TEAM = Z7F8BY55DS;
+				INFOPLIST_FILE = Sources/HealthyKingWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		A79EE70BBE877C707F09E165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sources/HealthyKing/HealthyKing.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Sources/HealthyKing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.healthyking.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		DB2A8DC798FB879306BA3D3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16157D2AC74B38C8F05CC71D /* Build configuration list for PBXNativeTarget "HealthyKing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				549511BF88352501B6C4EB35 /* Debug */,
+				A79EE70BBE877C707F09E165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3147E182BFD083FFBCE62684 /* Build configuration list for PBXNativeTarget "HealthyKingWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90779627FF98CACF0F129141 /* Debug */,
+				3F81A16ED97E1EE4E25B057F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4E3E4E1664E8BC75F2A0AB51 /* Build configuration list for PBXNativeTarget "HealthyKingWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C3E5BA8DD86AC70D583C1C3 /* Debug */,
+				50D3CB5818A8DF9490B489BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AE5FE0FBDE76C38FCE671FC3 /* Build configuration list for PBXProject "HealthyKing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB2A8DC798FB879306BA3D3B /* Debug */,
+				11DF06FFFCD8B220DE679DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		557AE6F99D4D5339A19DB421 /* XCLocalSwiftPackageReference "HealthyKingKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = HealthyKingKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F7776CA70BEBAED810EC3D1 /* HealthyKingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HealthyKingKit;
+		};
+		5E887B43677CB7413B08A8A2 /* HealthyKingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HealthyKingKit;
+		};
+		F1B61B340469D8AA92281FB6 /* HealthyKingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HealthyKingKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = EDB91098C6DD739301A3D654 /* Project object */;
+}

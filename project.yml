@@ -1,0 +1,101 @@
+name: HealthyKing
+
+options:
+  bundleIdPrefix: com.healthyking
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "17.0"
+    watchOS: "10.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+packages:
+  HealthyKingKit:
+    path: HealthyKingKit
+
+targets:
+  HealthyKing:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources/HealthyKing
+    dependencies:
+      - package: HealthyKingKit
+      - target: HealthyKingWatch
+        embed: true
+    info:
+      path: Sources/HealthyKing/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSHealthShareUsageDescription: "用于读取心率、HRV、睡眠、血氧等数据，在本机生成你的个人趋势与恢复评分。"
+        NSHealthUpdateUsageDescription: "用于记录你在应用内填写的体重等数据到健康App。"
+    entitlements:
+      path: Sources/HealthyKing/HealthyKing.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.healthyking.app
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  HealthyKingWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: Sources/HealthyKingWatch
+    dependencies:
+      - package: HealthyKingKit
+      - target: HealthyKingWidgetExtension
+        embed: true
+    info:
+      path: Sources/HealthyKingWatch/Info.plist
+      properties:
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: com.healthyking.app
+        NSHealthShareUsageDescription: "用于读取心率、HRV、睡眠、血氧等数据，在你的Watch上独立生成趋势与恢复评分。"
+        NSHealthUpdateUsageDescription: "用于记录你在应用内填写的体重等数据到健康App。"
+        WKRunsIndependentlyOfCompanionApp: true
+    entitlements:
+      path: Sources/HealthyKingWatch/HealthyKingWatch.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.healthyking.app.watchkitapp
+        SKIP_INSTALL: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  HealthyKingWidgetExtension:
+    type: app-extension
+    platform: watchOS
+    sources:
+      - path: Sources/HealthyKingWidget
+    dependencies:
+      - package: HealthyKingKit
+    info:
+      path: Sources/HealthyKingWidget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Sources/HealthyKingWidget/HealthyKingWidget.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.healthyking.app.watchkitapp.widget
+        SKIP_INSTALL: NO
