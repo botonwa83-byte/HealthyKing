@@ -4,15 +4,22 @@ import HealthyKingKit
 
 /// Selectable look-back window for the trend chart.
 enum TrendRange: String, CaseIterable, Identifiable {
-    case week, month, quarter
+    case week, month, quarter, year, threeYears
 
     var id: String { rawValue }
+
+    /// The common ranges shown as segments; longer ones live behind "更多".
+    static let shortRanges: [TrendRange] = [.week, .month, .quarter]
+    static let longRanges: [TrendRange] = [.year, .threeYears]
+    var isLong: Bool { Self.longRanges.contains(self) }
 
     var title: String {
         switch self {
         case .week: return "一周"
         case .month: return "一月"
         case .quarter: return "三月"
+        case .year: return "一年"
+        case .threeYears: return "三年"
         }
     }
 
@@ -21,6 +28,8 @@ enum TrendRange: String, CaseIterable, Identifiable {
         case .week: return 7
         case .month: return 30
         case .quarter: return 90
+        case .year: return 365
+        case .threeYears: return 1095
         }
     }
 
@@ -30,6 +39,8 @@ enum TrendRange: String, CaseIterable, Identifiable {
         case .week: return "近一周概览"
         case .month: return "近一月概览"
         case .quarter: return "近三月概览"
+        case .year: return "近一年概览"
+        case .threeYears: return "近三年概览"
         }
     }
 
@@ -39,16 +50,61 @@ enum TrendRange: String, CaseIterable, Identifiable {
         case .week: return "一周前"
         case .month: return "一月前"
         case .quarter: return "三月前"
+        case .year: return "一年前"
+        case .threeYears: return "三年前"
         }
     }
 
     /// A range-specific interpretation line, so the copy differs meaningfully
-    /// between week / month / quarter instead of repeating.
+    /// between ranges instead of repeating.
     var interpretation: String {
         switch self {
         case .week: return "近一周更适合观察短期波动，留意是否出现连续几天的明显偏离。"
         case .month: return "一个月的走向能反映近期状态的整体变化，单日起伏可忽略。"
         case .quarter: return "三个月属于长期趋势，更能体现训练与生活方式带来的累积影响。"
+        case .year: return "一年的跨度能体现季节性变化与长期健康走向。"
+        case .threeYears: return "三年属于超长期回顾，适合观察整体健康基线的演变。"
+        }
+    }
+}
+
+/// Range selector: segments for the common windows, plus a "更多" menu that
+/// reveals the longer 一年 / 三年 ranges. Shared by every trend chart.
+struct TrendRangePicker: View {
+    @Binding var range: TrendRange
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Picker("时间范围", selection: $range.animation(.easeInOut)) {
+                ForEach(TrendRange.shortRanges) { range in
+                    Text(range.title).tag(range)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            Menu {
+                ForEach(TrendRange.longRanges) { option in
+                    Button {
+                        withAnimation(.easeInOut) { range = option }
+                    } label: {
+                        if range == option {
+                            Label(option.title, systemImage: "checkmark")
+                        } else {
+                            Text(option.title)
+                        }
+                    }
+                }
+            } label: {
+                HStack(spacing: 3) {
+                    Text(range.isLong ? range.title : "更多")
+                    Image(systemName: "chevron.down").font(.caption2.weight(.semibold))
+                }
+                .font(.subheadline.weight(.medium))
+                .foregroundStyle(range.isLong ? Color.white : Color.accentColor)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 7)
+                .background(range.isLong ? Color.accentColor : Color.accentColor.opacity(0.14), in: Capsule())
+            }
         }
     }
 }
