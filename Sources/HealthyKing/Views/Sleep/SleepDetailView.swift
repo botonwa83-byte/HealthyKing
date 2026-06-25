@@ -77,7 +77,11 @@ struct SleepDetailView: View {
     let nights: [SleepNight]
     let durationSeries: MetricTimeSeries?
 
+    @State private var range: TrendRange = .week
+
     private var latest: SleepNight? { nights.last }
+
+    private var hasTrendData: Bool { (durationSeries?.samples.count ?? 0) >= 2 }
 
     var body: some View {
         ScrollView {
@@ -89,10 +93,13 @@ struct SleepDetailView: View {
                         stageChips(latest)
                     }
                     statStrip(latest)
-                    if nights.count >= 2 {
-                        trendCard
-                    }
-                } else {
+                }
+
+                if hasTrendData {
+                    trendCard
+                }
+
+                if latest == nil && !hasTrendData {
                     ContentUnavailableView("暂无睡眠数据", systemImage: "bed.double", description: Text("佩戴 Apple Watch 入睡后即可看到详细分析"))
                         .cardStyle()
                 }
@@ -236,30 +243,68 @@ struct SleepDetailView: View {
         .frame(maxWidth: .infinity)
     }
 
-    // MARK: Trend (stacked stages)
+    // MARK: Duration trend (week / month / quarter)
+
+    /// Daily sleep-duration samples (hours) limited to the selected window.
+    private var trendSamples: [DailySample] {
+        guard let samples = durationSeries?.samples, let last = samples.last?.date else { return [] }
+        guard let cutoff = Calendar.current.date(byAdding: .day, value: -range.days, to: last) else { return samples }
+        return samples.filter { $0.date >= cutoff }
+    }
+
+    private var trendAverage: Double? {
+        let values = trendSamples.map(\.value)
+        guard !values.isEmpty else { return nil }
+        return values.reduce(0, +) / Double(values.count)
+    }
 
     private var trendCard: some View {
-        let recent = Array(nights.suffix(14))
-        return VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "近期睡眠", systemImage: "chart.bar.xaxis")
-            Chart {
-                ForEach(recent) { night in
-                    ForEach([SleepStage.deep, .core, .rem], id: \.self) { stage in
-                        BarMark(
-                            x: .value("日期", night.date, unit: .day),
-                            y: .value("小时", stage.duration(in: night) / 3600)
-                        )
-                        .foregroundStyle(stage.color)
-                    }
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "睡眠时长趋势", systemImage: "chart.xyaxis.line")
+
+            Picker("时间范围", selection: $range.animation(.easeInOut)) {
+                ForEach(TrendRange.allCases) { range in
+                    Text(range.title).tag(range)
                 }
             }
-            .frame(height: 170)
-            .chartForegroundStyleScale([
-                SleepStage.deep.name: SleepStage.deep.color,
-                SleepStage.core.name: SleepStage.core.color,
-                SleepStage.rem.name: SleepStage.rem.color
-            ])
-            .chartYAxisLabel("小时")
+            .pickerStyle(.segmented)
+
+            let samples = trendSamples
+            if samples.count >= 2 {
+                Chart {
+                    if let avg = trendAverage {
+                        RuleMark(y: .value("平均", avg))
+                            .foregroundStyle(.secondary.opacity(0.5))
+                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
+                            .annotation(position: .top, alignment: .trailing) {
+                                Text(String(format: "平均 %.1f 小时", avg))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                    }
+                    ForEach(samples, id: \.date) { sample in
+                        AreaMark(x: .value("日期", sample.date), y: .value("小时", sample.value))
+                            .interpolationMethod(.catmullRom)
+                            .foregroundStyle(LinearGradient(colors: [Color(hex: 0x9D7BFF).opacity(0.30), .clear], startPoint: .top, endPoint: .bottom))
+                        LineMark(x: .value("日期", sample.date), y: .value("小时", sample.value))
+                            .interpolationMethod(.catmullRom)
+                            .foregroundStyle(LinearGradient(colors: [Color(hex: 0x9D7BFF), Color(hex: 0x5B3CC4)], startPoint: .leading, endPoint: .trailing))
+                            .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    }
+                    if let last = samples.last {
+                        PointMark(x: .value("日期", last.date), y: .value("小时", last.value))
+                            .foregroundStyle(Color(hex: 0x5B3CC4))
+                            .symbolSize(70)
+                    }
+                }
+                .frame(height: 180)
+                .chartYAxisLabel("小时")
+            } else {
+                Label("该范围内的睡眠数据还不足以绘制趋势。", systemImage: "hourglass")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 120)
+            }
         }
         .cardStyle()
     }
