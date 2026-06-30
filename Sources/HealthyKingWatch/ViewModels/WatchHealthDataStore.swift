@@ -48,7 +48,7 @@ final class WatchHealthDataStore: ObservableObject {
                 sex: profile.sex
             )
             let dailyLoad = trimpCalculator.dailyLoad(forWorkouts: workouts)
-            trainingLoad = acwrCalculator.evaluate(dailyLoad: dailyLoad, asOf: today)
+            trainingLoad = acwrCalculator.evaluate(dailyLoad: dailyLoad, workouts: workouts, asOf: today)
             lastError = nil
             lastUpdated = Date()
         } catch {

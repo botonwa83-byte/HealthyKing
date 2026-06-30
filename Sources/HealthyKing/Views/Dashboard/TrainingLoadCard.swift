@@ -41,9 +41,27 @@ struct TrainingLoadCard: View {
                 .font(.title3.weight(.bold))
                 .foregroundStyle(result.zone.soloColor)
 
+            Text(result.summarySentence)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: 10) {
+                LoadMiniStat(
+                    title: "近7天",
+                    value: result.evidence.recentDurationText,
+                    subtitle: result.evidence.recentCompositionText
+                )
+                LoadMiniStat(
+                    title: "28天基线",
+                    value: result.evidence.chronicDurationText,
+                    subtitle: "日均 \(Int(result.evidence.chronicDailyAverage.rounded())) 负荷"
+                )
+            }
+
             ActivityPathBand(acwr: acwr, currentZone: result.zone)
 
-            Text(result.zone.recommendation)
+            Text(result.actionSentence)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -63,6 +81,32 @@ struct TrainingLoadCard: View {
             }
         }
         .cardStyle()
+    }
+}
+
+private struct LoadMiniStat: View {
+    let title: String
+    let value: String
+    let subtitle: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.secondary)
+            Text(value)
+                .font(.subheadline.weight(.bold))
+                .monospacedDigit()
+            Text(subtitle)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 
@@ -170,5 +214,74 @@ private extension TrainingLoadZone {
         case .elevated: return "注意节奏，适当放缓"
         case .high: return "该好好恢复一下了"
         }
+    }
+}
+
+extension TrainingLoadResult {
+    var summarySentence: String {
+        let evidence = evidence
+        guard evidence.hasRecentMovement else {
+            return "近 \(evidence.acuteWindowDays) 天几乎没有记录到运动负荷，当前判断主要来自近期活动缺口。"
+        }
+        guard let acwr else {
+            return "已读取到运动记录，但还需要更多连续数据来建立 28 天负荷基线。"
+        }
+        let relation: String
+        if acwr < 0.8 {
+            relation = "低于"
+        } else if acwr <= 1.3 {
+            relation = "接近"
+        } else {
+            relation = "高于"
+        }
+        return "近 \(evidence.acuteWindowDays) 天日均负荷 \(Int(evidence.recentDailyAverage.rounded()))，\(relation) 你的 28 天日均基线 \(Int(evidence.chronicDailyAverage.rounded()))。"
+    }
+
+    var actionSentence: String {
+        let source = evidence.primarySourceText
+        switch zone {
+        case .detraining:
+            return "\(source)。如果今天状态正常，可以安排轻松有氧或力量恢复训练，把节奏逐步找回来。"
+        case .optimal:
+            return "\(source)。近期负荷和长期基线匹配，按原计划训练即可。"
+        case .elevated:
+            return "\(source)。近期负荷上升较快，今天更适合中低强度或缩短训练时长。"
+        case .high:
+            return "\(source)。近期负荷明显偏高，建议优先恢复，避免连续高强度。"
+        }
+    }
+}
+
+extension TrainingLoadEvidence {
+    var recentDurationText: String {
+        guard recentDurationMinutes > 0 else { return "0 分钟" }
+        return "\(Int(recentDurationMinutes.rounded())) 分钟"
+    }
+
+    var chronicDurationText: String {
+        guard chronicDurationMinutes > 0 else { return "0 分钟" }
+        return "\(Int(chronicDurationMinutes.rounded())) 分钟"
+    }
+
+    var recentCompositionText: String {
+        if recentFormalWorkoutCount > 0 && recentWalkingDays > 0 {
+            return "\(recentFormalWorkoutCount) 次锻炼 + \(recentWalkingDays) 天步行"
+        }
+        if recentFormalWorkoutCount > 0 {
+            return "\(recentFormalWorkoutCount) 次锻炼"
+        }
+        if recentWalkingDays > 0 {
+            return "\(recentWalkingDays) 天日常步行"
+        }
+        return "暂无运动记录"
+    }
+
+    var primarySourceText: String {
+        if let latestSession {
+            let days = Calendar.current.dateComponents([.day], from: Calendar.current.startOfDay(for: latestSession.startDate), to: Calendar.current.startOfDay(for: Date())).day ?? 0
+            let dayText = days == 0 ? "今天" : days == 1 ? "昨天" : "\(days) 天前"
+            return "最近一次记录是\(dayText)的\(latestSession.activityName)，约 \(Int(latestSession.durationMinutes.rounded())) 分钟"
+        }
+        return "近 \(acuteWindowDays) 天主要没有正式锻炼记录"
     }
 }

@@ -11,7 +11,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>KingFit</string>
+	<key>CFBundleDisplayName</key>
+	<string>KingFit</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -21,7 +23,7 @@
 	<key>NSHealthShareUsageDescription</key>
 	<string>用于读取心率、HRV、睡眠、血氧等数据，在你的Watch上独立生成趋势与恢复评分。</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>用于记录你在应用内填写的体重等数据到健康App。</string>
+	<string>用于在你确认后将健康与训练相关记录写入健康App，帮助保持个人数据同步。</string>
 	<key>WKApplication</key>
 	<true/>
 	<key>WKCompanionAppBundleIdentifier</key>

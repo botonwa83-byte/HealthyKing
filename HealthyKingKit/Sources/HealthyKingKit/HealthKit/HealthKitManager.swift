@@ -46,21 +46,13 @@ public final class HealthKitManager: @unchecked Sendable {
         return types
     }()
 
-    private let shareTypes: Set<HKSampleType> = {
-        var types: Set<HKSampleType> = []
-        if let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass) {
-            types.insert(bodyMass)
-        }
-        return types
-    }()
-
     public init() {}
 
     public func requestAuthorization() async throws {
         guard HKHealthStore.isHealthDataAvailable() else {
             throw HealthKitManagerError.notAvailableOnThisDevice
         }
-        try await store.requestAuthorization(toShare: shareTypes, read: readTypes)
+        try await store.requestAuthorization(toShare: [], read: readTypes)
     }
 
     // MARK: - User characteristics
@@ -231,13 +223,6 @@ public final class HealthKitManager: @unchecked Sendable {
     public func fetchBodyMass(days: Int = 365) async throws -> MetricTimeSeries {
         let samples = try await dailySamples(for: .bodyMass, unit: .gramUnit(with: .kilo), aggregation: .discreteAverage, days: days)
         return MetricTimeSeries(metric: .bodyMass, samples: samples)
-    }
-
-    public func saveBodyMass(kilograms: Double, date: Date = Date()) async throws {
-        guard let bodyMassType = HKObjectType.quantityType(forIdentifier: .bodyMass) else { return }
-        let quantity = HKQuantity(unit: .gramUnit(with: .kilo), doubleValue: kilograms)
-        let sample = HKQuantitySample(type: bodyMassType, quantity: quantity, start: date, end: date)
-        try await store.save(sample)
     }
 
     // MARK: - Sleep
@@ -437,7 +422,7 @@ public final class HealthKitManager: @unchecked Sendable {
                 startDate: noon,
                 durationMinutes: minutes,
                 averageHeartRate: nil,
-                activityName: "步行",
+                activityName: "日常步行",
                 estimatedIntensityFraction: walkingIntensity
             )
         }

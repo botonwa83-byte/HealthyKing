@@ -147,4 +147,8 @@ public struct WorkoutSummary: Codable, Hashable, Sendable {
         self.activityName = activityName
         self.estimatedIntensityFraction = estimatedIntensityFraction
     }
+
+    public var isSupplementalWalking: Bool {
+        activityName == "日常步行"
+    }
 }

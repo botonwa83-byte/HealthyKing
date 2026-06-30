@@ -43,11 +43,14 @@ final class HealthDataStore: ObservableObject {
         isLoading = true
         defer { isLoading = false }
         do {
-            let seriesList = try await healthKit.fetchAllMetricSeries(days: 365)
+            let seriesList = try await healthKit.fetchAllMetricSeries(days: 1095)
             metricSeries = Dictionary(uniqueKeysWithValues: seriesList.map { ($0.metric, $0) })
 
             let today = Date()
             insights = insightEngine.insights(for: seriesList, asOf: today)
+            let profile = healthKit.biologicalProfile()
+            age = profile.age ?? age
+            biologicalSex = profile.sex
             recovery = recoveryEngine.score(from: insights)
             trainingLoad = try await computeTrainingLoad(asOf: today)
             todayActivity = try? await healthKit.fetchTodayActivity()
@@ -70,13 +73,13 @@ final class HealthDataStore: ObservableObject {
         var history: [DailySample] = []
         for offset in stride(from: 29, through: 0, by: -1) {
             guard let day = calendar.date(byAdding: .day, value: -offset, to: referenceDate) else { continue }
-            let result = acwrCalculator.evaluate(dailyLoad: dailyLoad, asOf: day, calendar: calendar)
+            let result = acwrCalculator.evaluate(dailyLoad: dailyLoad, workouts: workouts, asOf: day, calendar: calendar)
             if let acwr = result.acwr, result.isReliable {
                 history.append(DailySample(date: day, value: acwr))
             }
         }
         acwrHistory = history
 
-        return acwrCalculator.evaluate(dailyLoad: dailyLoad, asOf: referenceDate, calendar: calendar)
+        return acwrCalculator.evaluate(dailyLoad: dailyLoad, workouts: workouts, asOf: referenceDate, calendar: calendar)
     }
 }

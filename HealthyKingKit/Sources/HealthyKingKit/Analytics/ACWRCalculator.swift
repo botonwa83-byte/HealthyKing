@@ -20,9 +20,15 @@ public struct ACWRCalculator: Sendable {
     /// - Parameter dailyLoad: TRIMP (or other load metric) per day. Missing
     ///   days are treated as zero load, which is the correct convention for
     ///   training-load EWMA (a rest day genuinely contributes zero).
-    public func evaluate(dailyLoad: [DailySample], asOf referenceDate: Date, calendar: Calendar = .current) -> TrainingLoadResult {
+    public func evaluate(
+        dailyLoad: [DailySample],
+        workouts: [WorkoutSummary] = [],
+        asOf referenceDate: Date,
+        calendar: Calendar = .current
+    ) -> TrainingLoadResult {
+        let evidence = makeEvidence(dailyLoad: dailyLoad, workouts: workouts, asOf: referenceDate, calendar: calendar)
         guard let earliestNeeded = calendar.date(byAdding: .day, value: -(chronicWindowDays - 1), to: referenceDate) else {
-            return TrainingLoadResult(acuteLoad: 0, chronicLoad: 0, acwr: nil, zone: .detraining, isReliable: false)
+            return TrainingLoadResult(acuteLoad: 0, chronicLoad: 0, acwr: nil, zone: .detraining, isReliable: false, evidence: evidence)
         }
 
         let loadByDay = Dictionary(uniqueKeysWithValues: dailyLoad.map { (calendar.startOfDay(for: $0.date), $0.value) })
@@ -48,12 +54,12 @@ public struct ACWRCalculator: Sendable {
         let isReliable = daysWithAnyData >= max(7, chronicWindowDays / 4)
 
         guard chronicLoad > 0 else {
-            return TrainingLoadResult(acuteLoad: acuteLoad, chronicLoad: chronicLoad, acwr: nil, zone: .detraining, isReliable: isReliable)
+            return TrainingLoadResult(acuteLoad: acuteLoad, chronicLoad: chronicLoad, acwr: nil, zone: .detraining, isReliable: isReliable, evidence: evidence)
         }
 
         let acwr = acuteLoad / chronicLoad
         let zone = TrainingLoadZone.zone(forACWR: acwr)
-        return TrainingLoadResult(acuteLoad: acuteLoad, chronicLoad: chronicLoad, acwr: acwr, zone: zone, isReliable: isReliable)
+        return TrainingLoadResult(acuteLoad: acuteLoad, chronicLoad: chronicLoad, acwr: acwr, zone: zone, isReliable: isReliable, evidence: evidence)
     }
 
     private func ewma(_ values: [Double], lambda: Double) -> Double {
@@ -63,5 +69,48 @@ public struct ACWRCalculator: Sendable {
             current = lambda * value + (1 - lambda) * current
         }
         return current
+    }
+
+    private func makeEvidence(
+        dailyLoad: [DailySample],
+        workouts: [WorkoutSummary],
+        asOf referenceDate: Date,
+        calendar: Calendar
+    ) -> TrainingLoadEvidence {
+        let referenceDay = calendar.startOfDay(for: referenceDate)
+        let recentStart = calendar.date(byAdding: .day, value: -(acuteWindowDays - 1), to: referenceDay) ?? referenceDay
+        let chronicStart = calendar.date(byAdding: .day, value: -(chronicWindowDays - 1), to: referenceDay) ?? referenceDay
+
+        func isInRange(_ date: Date, start: Date) -> Bool {
+            let day = calendar.startOfDay(for: date)
+            return day >= start && day <= referenceDay
+        }
+
+        let recentLoads = dailyLoad.filter { isInRange($0.date, start: recentStart) }
+        let chronicLoads = dailyLoad.filter { isInRange($0.date, start: chronicStart) }
+        let recentLoadTotal = recentLoads.map(\.value).reduce(0, +)
+        let chronicLoadTotal = chronicLoads.map(\.value).reduce(0, +)
+
+        let recentSessions = workouts.filter { isInRange($0.startDate, start: recentStart) }
+        let chronicSessions = workouts.filter { isInRange($0.startDate, start: chronicStart) }
+        let latest = chronicSessions.max { $0.startDate < $1.startDate }
+
+        return TrainingLoadEvidence(
+            acuteWindowDays: acuteWindowDays,
+            chronicWindowDays: chronicWindowDays,
+            recentLoadTotal: recentLoadTotal,
+            chronicLoadTotal: chronicLoadTotal,
+            recentDailyAverage: recentLoadTotal / Double(max(acuteWindowDays, 1)),
+            chronicDailyAverage: chronicLoadTotal / Double(max(chronicWindowDays, 1)),
+            recentSessionCount: recentSessions.count,
+            recentFormalWorkoutCount: recentSessions.filter { !$0.isSupplementalWalking }.count,
+            recentWalkingDays: recentSessions.filter(\.isSupplementalWalking).count,
+            recentDurationMinutes: recentSessions.map(\.durationMinutes).reduce(0, +),
+            chronicSessionCount: chronicSessions.count,
+            chronicFormalWorkoutCount: chronicSessions.filter { !$0.isSupplementalWalking }.count,
+            chronicWalkingDays: chronicSessions.filter(\.isSupplementalWalking).count,
+            chronicDurationMinutes: chronicSessions.map(\.durationMinutes).reduce(0, +),
+            latestSession: latest
+        )
     }
 }

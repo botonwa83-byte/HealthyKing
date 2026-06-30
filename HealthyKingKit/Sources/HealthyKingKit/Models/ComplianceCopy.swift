@@ -18,7 +18,4 @@ public enum ComplianceCopy {
 
     public static let healthShareUsageDescription =
         "用于读取心率、HRV、睡眠、血氧等数据，在本机生成你的个人趋势与恢复评分。"
-
-    public static let healthUpdateUsageDescription =
-        "用于记录你在应用内填写的体重等数据到健康App。"
 }

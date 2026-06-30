@@ -2,17 +2,11 @@ import SwiftUI
 import HealthyKingKit
 
 struct SettingsView: View {
+    private static let developerAppsURL = URL(string: "https://apps.apple.com/us/developer/%E5%B3%B0-%E7%8E%8B/id1896489503")!
+
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    CrossPromoCard()
-                        .listRowInsets(EdgeInsets())
-                        .listRowBackground(Color.clear)
-                } header: {
-                    Text("更多")
-                }
-
                 Section {
                     Label {
                         Text(ComplianceCopy.onboardingDisclaimer)
@@ -53,6 +47,18 @@ struct SettingsView: View {
                         Text(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0")
                             .foregroundStyle(.secondary)
                     }
+                }
+
+                Section {
+                    Button {
+                        UIApplication.shared.open(Self.developerAppsURL)
+                    } label: {
+                        Label("发现我的其他应用", systemImage: "square.grid.2x2.fill")
+                    }
+                } header: {
+                    Text("更多")
+                } footer: {
+                    Text("在 App Store 查看同一开发者发布的其他工具。")
                 }
             }
             .navigationTitle("设置")

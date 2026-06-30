@@ -180,12 +180,7 @@ struct MetricDetailView: View {
     }
 
     private var rangePicker: some View {
-        Picker("时间范围", selection: $range.animation(.easeInOut)) {
-            ForEach(TrendRange.allCases) { range in
-                Text(range.title).tag(range)
-            }
-        }
-        .pickerStyle(.segmented)
+        TrendRangePicker(range: $range)
     }
 
     @ViewBuilder

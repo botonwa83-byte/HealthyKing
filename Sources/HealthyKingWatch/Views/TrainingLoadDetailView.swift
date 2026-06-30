@@ -17,10 +17,11 @@ struct TrainingLoadDetailView: View {
                     if let acwr = load.acwr {
                         statRow(title: "急慢性负荷比 (ACWR)", value: String(format: "%.2f", acwr))
                     }
-                    statRow(title: "急性负荷 (7天)", value: String(format: "%.0f", load.acuteLoad))
-                    statRow(title: "慢性负荷 (28天)", value: String(format: "%.0f", load.chronicLoad))
+                    statRow(title: "近7天日均负荷", value: String(format: "%.0f", load.evidence.recentDailyAverage))
+                    statRow(title: "28天日均基线", value: String(format: "%.0f", load.evidence.chronicDailyAverage))
+                    statRow(title: "近7天来源", value: load.evidence.recentCompositionText)
 
-                    Text(load.zone.recommendation)
+                    Text(load.watchExplanation)
                         .font(.footnote)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(10)
@@ -61,6 +62,36 @@ struct TrainingLoadDetailView: View {
         .padding(.horizontal, 8)
         .padding(.vertical, 6)
         .background(.background.secondary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+    }
+}
+
+private extension TrainingLoadResult {
+    var watchExplanation: String {
+        switch zone {
+        case .detraining:
+            return "近7天负荷低于你的长期节奏。若状态正常，可以安排轻松活动逐步恢复。"
+        case .optimal:
+            return "近7天负荷接近28天基线，当前节奏比较稳定。"
+        case .elevated:
+            return "近7天负荷高于28天基线，今天适合控制强度。"
+        case .high:
+            return "近7天负荷明显高于28天基线，建议优先恢复。"
+        }
+    }
+}
+
+private extension TrainingLoadEvidence {
+    var recentCompositionText: String {
+        if recentFormalWorkoutCount > 0 && recentWalkingDays > 0 {
+            return "\(recentFormalWorkoutCount)练+\(recentWalkingDays)步"
+        }
+        if recentFormalWorkoutCount > 0 {
+            return "\(recentFormalWorkoutCount)次锻炼"
+        }
+        if recentWalkingDays > 0 {
+            return "\(recentWalkingDays)天步行"
+        }
+        return "暂无"
     }
 }
 

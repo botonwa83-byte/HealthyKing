@@ -30,7 +30,7 @@ final class ACWRCalculatorTests: XCTestCase {
         let result = ACWRCalculator().evaluate(dailyLoad: samples, asOf: reference, calendar: calendar)
 
         XCTAssertNotNil(result.acwr)
-        XCTAssertGreaterThan(result.acwr!, 1.3, "a sharp acute spike over a steady chronic baseline should read as elevated/high risk")
+        XCTAssertGreaterThan(result.acwr!, 1.3, "a sharp acute spike over a steady chronic baseline should read as elevated/high load")
         XCTAssertTrue(result.zone == .elevated || result.zone == .high)
     }
 
@@ -51,5 +51,43 @@ final class ACWRCalculatorTests: XCTestCase {
         let samples = dailySamples([100, 100, 100], endingAt: reference)
         let result = ACWRCalculator().evaluate(dailyLoad: samples, asOf: reference, calendar: calendar)
         XCTAssertFalse(result.isReliable)
+    }
+
+    func testEvidenceSummarizesRecentWorkoutsAndWalking() {
+        let reference = calendar.startOfDay(for: Date())
+        let loads = dailySamples(Array(repeating: 50.0, count: 28), endingAt: reference)
+        let recentRun = WorkoutSummary(
+            startDate: calendar.date(byAdding: .day, value: -1, to: reference)!,
+            durationMinutes: 45,
+            averageHeartRate: 130,
+            activityName: "跑步"
+        )
+        let walking = WorkoutSummary(
+            startDate: calendar.date(byAdding: .day, value: -2, to: reference)!,
+            durationMinutes: 30,
+            averageHeartRate: nil,
+            activityName: "日常步行",
+            estimatedIntensityFraction: 0.4
+        )
+        let olderRide = WorkoutSummary(
+            startDate: calendar.date(byAdding: .day, value: -14, to: reference)!,
+            durationMinutes: 60,
+            averageHeartRate: 120,
+            activityName: "骑行"
+        )
+
+        let result = ACWRCalculator().evaluate(
+            dailyLoad: loads,
+            workouts: [olderRide, walking, recentRun],
+            asOf: reference,
+            calendar: calendar
+        )
+
+        XCTAssertEqual(result.evidence.recentSessionCount, 2)
+        XCTAssertEqual(result.evidence.recentFormalWorkoutCount, 1)
+        XCTAssertEqual(result.evidence.recentWalkingDays, 1)
+        XCTAssertEqual(result.evidence.recentDurationMinutes, 75, accuracy: 0.01)
+        XCTAssertEqual(result.evidence.chronicSessionCount, 3)
+        XCTAssertEqual(result.evidence.latestSession?.activityName, "跑步")
     }
 }

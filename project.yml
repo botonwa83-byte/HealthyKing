@@ -25,6 +25,8 @@ targets:
     platform: iOS
     sources:
       - path: Sources/HealthyKing
+      - path: Sources/SharedPrivacy/PrivacyInfo.xcprivacy
+        buildPhase: resources
     dependencies:
       - package: HealthyKingKit
       - target: HealthyKingWatch
@@ -35,8 +37,10 @@ targets:
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
+        CFBundleDisplayName: KingFit
+        CFBundleName: KingFit
         NSHealthShareUsageDescription: "用于读取心率、HRV、睡眠、血氧等数据，在本机生成你的个人趋势与恢复评分。"
-        NSHealthUpdateUsageDescription: "用于记录你在应用内填写的体重等数据到健康App。"
+        NSHealthUpdateUsageDescription: "用于在你确认后将健康与训练相关记录写入健康App，帮助保持个人数据同步。"
     entitlements:
       path: Sources/HealthyKing/HealthyKing.entitlements
       properties:
@@ -54,6 +58,8 @@ targets:
     platform: watchOS
     sources:
       - path: Sources/HealthyKingWatch
+      - path: Sources/SharedPrivacy/PrivacyInfo.xcprivacy
+        buildPhase: resources
     dependencies:
       - package: HealthyKingKit
       - target: HealthyKingWidgetExtension
@@ -63,8 +69,10 @@ targets:
       properties:
         WKApplication: true
         WKCompanionAppBundleIdentifier: com.healthyking.app
+        CFBundleDisplayName: KingFit
+        CFBundleName: KingFit
         NSHealthShareUsageDescription: "用于读取心率、HRV、睡眠、血氧等数据，在你的Watch上独立生成趋势与恢复评分。"
-        NSHealthUpdateUsageDescription: "用于记录你在应用内填写的体重等数据到健康App。"
+        NSHealthUpdateUsageDescription: "用于在你确认后将健康与训练相关记录写入健康App，帮助保持个人数据同步。"
         WKRunsIndependentlyOfCompanionApp: true
     entitlements:
       path: Sources/HealthyKingWatch/HealthyKingWatch.entitlements
@@ -74,7 +82,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.healthyking.app.watchkitapp
-        SKIP_INSTALL: NO
+        SKIP_INSTALL: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
 
@@ -83,6 +91,8 @@ targets:
     platform: watchOS
     sources:
       - path: Sources/HealthyKingWidget
+      - path: Sources/SharedPrivacy/PrivacyInfo.xcprivacy
+        buildPhase: resources
     dependencies:
       - package: HealthyKingKit
     info:
@@ -90,6 +100,8 @@ targets:
       properties:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        CFBundleDisplayName: KingFit
+        CFBundleName: KingFit
     entitlements:
       path: Sources/HealthyKingWidget/HealthyKingWidget.entitlements
       properties:
@@ -98,4 +110,4 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.healthyking.app.watchkitapp.widget
-        SKIP_INSTALL: NO
+        SKIP_INSTALL: YES
